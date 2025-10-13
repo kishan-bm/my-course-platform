@@ -14,7 +14,7 @@ export default function ContactPage() {
           Contact Us
         </h1>
         <p className="text-lg text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-          We'd love to hear from you! Whether you have a question about our courses, partnerships, or anything else, our team is ready to answer all your questions.
+          We&apos;d love to hear from you! Whether you have a question about our courses, partnerships, or anything else, our team is ready to answer all your questions.
         </p>
 
         <div className="grid md:grid-cols-2 gap-12 bg-white p-8 rounded-lg shadow-md">
