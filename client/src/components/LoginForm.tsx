@@ -70,7 +70,6 @@
 import { useAuthModal } from '@/hooks/userAuthModal';
 import { FaGoogle } from 'react-icons/fa';
 import { useState, FormEvent } from 'react';
-import axios from 'axios';
 
 export default function LoginForm() {
   const { switchView, closeModal } = useAuthModal();
@@ -79,19 +78,27 @@ export default function LoginForm() {
 
   const handleLoginSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try {
-      const response = await axios.post('http://localhost:5001/api/auth/login', {
-        emailOrPhone,
-        password,
-      });
-      alert(`Welcome, ${response.data.user.fullName}!`);
+    
+    // Hardcoded credentials for demo purposes
+    const validCredentials = [
+      { email: 'admin@careerfastrack.com', password: 'admin123', name: 'Admin User' },
+      { email: 'student@careerfastrack.com', password: 'student123', name: 'John Student' },
+      { email: 'instructor@careerfastrack.com', password: 'instructor123', name: 'Dr. Sarah Smith' },
+      { email: 'demo@test.com', password: 'demo123', name: 'Demo User' }
+    ];
+    
+    const user = validCredentials.find(
+      cred => (cred.email === emailOrPhone || cred.email === emailOrPhone) && cred.password === password
+    );
+    
+    if (user) {
+      alert(`Welcome back, ${user.name}!`);
       closeModal();
-    } catch (error) { // --- FIX 1: Removed ": any" and added proper error handling ---
-      let errorMessage = 'Login failed.';
-      if (axios.isAxiosError(error) && error.response) {
-        errorMessage = error.response.data.error;
-      }
-      alert(errorMessage);
+      // Reset form
+      setEmailOrPhone('');
+      setPassword('');
+    } else {
+      alert('Invalid credentials. Try: admin@careerfastrack.com / admin123');
     }
   };
 
