@@ -9,7 +9,7 @@ const testimonialsData = [
     avatar: "/images/avatar1.jpg",
     rating: 5,
     course: "Full-Stack Web Development",
-    salary: "₹18 LPA"
+    // salary: "₹18 LPA"
   },
   {
     quote: "I went from zero coding knowledge to landing my first developer job in six months. The live training sessions and project-based learning made all the difference.",
@@ -18,7 +18,7 @@ const testimonialsData = [
     avatar: "/images/avatar2.jpg",
     rating: 5,
     course: "Data Science & ML",
-    salary: "₹22 LPA"
+    // salary: "₹22 LPA"
   },
   {
     quote: "The curriculum is up-to-date with industry standards, which made the transition from learning to working seamless. The placement support was outstanding!",
@@ -27,35 +27,35 @@ const testimonialsData = [
     avatar: "/images/avatar3.jpg",
     rating: 5,
     course: "Cloud Computing",
-    salary: "₹25 LPA"
+    // salary: "₹25 LPA"
   },
-  {
-    quote: "The instructors are world-class and the hands-on approach helped me understand complex concepts easily. I'm now working on cutting-edge AI projects at Tesla.",
-    name: "Vikram Singh",
-    role: "AI Engineer at Tesla",
-    avatar: "/images/team1.jpg",
-    rating: 5,
-    course: "Artificial Intelligence",
-    salary: "₹28 LPA"
-  },
-  {
-    quote: "The mobile app development course was comprehensive and practical. I built real apps during the course and now I'm developing apps for millions of users at Uber.",
-    name: "Sneha Reddy",
-    role: "Mobile Developer at Uber",
-    avatar: "/images/team2.jpg",
-    rating: 5,
-    course: "Mobile App Development",
-    salary: "₹20 LPA"
-  },
-  {
-    quote: "The cybersecurity training was intense but incredibly rewarding. The practical labs and real-world scenarios prepared me perfectly for my role at IBM.",
-    name: "Arjun Mehta",
-    role: "Security Analyst at IBM",
-    avatar: "/images/team3.jpg",
-    rating: 5,
-    course: "Cybersecurity",
-    salary: "₹16 LPA"
-  }
+  // {
+  //   quote: "The instructors are world-class and the hands-on approach helped me understand complex concepts easily. I'm now working on cutting-edge AI projects at Tesla.",
+  //   name: "Vikram Singh",
+  //   role: "AI Engineer at Tesla",
+  //   avatar: "/images/team1.jpg",
+  //   rating: 5,
+  //   course: "Artificial Intelligence",
+  //   salary: "₹28 LPA"
+  // },
+  // {
+  //   quote: "The mobile app development course was comprehensive and practical. I built real apps during the course and now I'm developing apps for millions of users at Uber.",
+  //   name: "Sneha Reddy",
+  //   role: "Mobile Developer at Uber",
+  //   avatar: "/images/team2.jpg",
+  //   rating: 5,
+  //   course: "Mobile App Development",
+  //   salary: "₹20 LPA"
+  // },
+  // {
+  //   quote: "The cybersecurity training was intense but incredibly rewarding. The practical labs and real-world scenarios prepared me perfectly for my role at IBM.",
+  //   name: "Arjun Mehta",
+  //   role: "Security Analyst at IBM",
+  //   avatar: "/images/team3.jpg",
+  //   rating: 5,
+  //   course: "Cybersecurity",
+  //   salary: "₹16 LPA"
+  // }
 ];
 
 export default function Testimonials() {
@@ -104,7 +104,7 @@ export default function Testimonials() {
                 <div className="flex-1">
                   <p className="font-bold text-gray-900 text-lg">{testimonial.name}</p>
                   <p className="text-sm text-gray-600">{testimonial.role}</p>
-                  <p className="text-xs text-green-600 font-semibold">{testimonial.salary}</p>
+                  {/* <p className="text-xs text-green-600 font-semibold">{testimonial.salary}</p> */}
                 </div>
               </div>
 
@@ -125,7 +125,7 @@ export default function Testimonials() {
         </div>
 
         {/* Stats Section */}
-        <div className="mt-20 bg-white rounded-2xl shadow-lg p-8">
+        {/* <div className="mt-20 bg-white rounded-2xl shadow-lg p-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div>
               <div className="text-4xl font-bold text-blue-600 mb-2">10K+</div>
@@ -144,7 +144,7 @@ export default function Testimonials() {
               <div className="text-gray-600">Average Salary</div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );

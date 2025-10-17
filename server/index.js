@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const { PrismaClient } = require('@prisma/client');
 const bcrypt = require('bcryptjs');
+const nodemailer = require('nodemailer'); // Make sure nodemailer is required
 require('dotenv').config();
 
 const prisma = new PrismaClient();
@@ -11,6 +12,17 @@ app.use(cors());
 app.use(express.json());
 
 const PORT = process.env.PORT || 5001;
+
+// --- Nodemailer Transport for Resend ---
+const transporter = nodemailer.createTransport({
+  host: 'smtp.resend.com',
+  secure: true,
+  port: 465,
+  auth: {
+    user: 'resend', // This is always 'resend'
+    pass: process.env.RESEND_API_KEY, // Your API key from the .env file
+  },
+});
 
 const isEmail = (input) => input.includes('@');
 
@@ -47,6 +59,24 @@ app.post('/api/auth/send-otp', async (req, res) => {
           otpExpiresAt,
         },
       });
+    }
+    // --- REAL EMAIL SENDING LOGIC ---
+    if (isEmail(emailOrPhone)) {
+      try {
+        await transporter.sendMail({
+          from: 'onboarding@resend.dev', // Default "from" address for Resend
+          to: emailOrPhone,
+          subject: 'Your OTP Code',
+          html: `<p>Your OTP code is: <strong>${otp}</strong></p>`,
+        });
+        console.log(`OTP email sent to ${emailOrPhone}`);
+      } catch (emailError) {
+        console.error('Failed to send email:', emailError);
+        // We don't want to fail the whole request if email fails, but we should log it.
+      }
+    } else {
+      // TODO: Add SMS sending logic here later
+      console.log('SMS sending not yet implemented.');
     }
     res.status(200).json({ success: true, message: 'OTP sent successfully.' });
   } catch (error) {

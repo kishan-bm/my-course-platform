@@ -8,60 +8,60 @@ export default function FeaturedCourses() {
       href: "/courses",
       icon: <FaCode />,
       description: "Master modern web development with React, Node.js, and databases",
-      duration: "6 months",
-      students: "2.5K",
+      // duration: "6 months",
+      // students: "2.5K",
       rating: 4.9,
-      price: "₹49,999"
+      // price: "₹49,999"
     },
     {
       title: "Data Science with Python",
       href: "/courses",
       icon: <FaDatabase />,
       description: "Learn Python, statistics, and ML algorithms with real datasets",
-      duration: "8 months",
-      students: "1.8K",
+      // duration: "8 months",
+      // students: "1.8K",
       rating: 4.8,
-      price: "₹59,999"
+      // price: "₹59,999"
     },
     {
       title: "Cloud Computing & DevOps",
       href: "/courses",
       icon: <FaCloud />,
       description: "Master AWS, Docker, Kubernetes, and CI/CD pipelines",
-      duration: "5 months",
-      students: "1.2K",
+      // duration: "5 months",
+      // students: "1.2K",
       rating: 4.9,
-      price: "₹44,999"
+      // price: "₹44,999"
     },
     {
       title: "Mobile App Development",
       href: "/courses",
       icon: <FaMobile />,
       description: "Build iOS and Android apps using React Native and Flutter",
-      duration: "6 months",
-      students: "1.6K",
+      // duration: "6 months",
+      // students: "1.6K",
       rating: 4.7,
-      price: "₹39,999"
+      // price: "₹39,999"
     },
     {
       title: "Artificial Intelligence",
       href: "/courses",
       icon: <FaBrain />,
       description: "Deep dive into AI, neural networks, and deep learning",
-      duration: "10 months",
-      students: "900",
+      // duration: "10 months",
+      // students: "900",
       rating: 4.9,
-      price: "₹79,999"
+      // price: "₹79,999"
     },
     {
       title: "Cybersecurity",
       href: "/courses",
       icon: <FaShieldAlt />,
       description: "Learn ethical hacking, penetration testing, and security",
-      duration: "7 months",
-      students: "1.1K",
+      // duration: "7 months",
+      // students: "1.1K",
       rating: 4.8,
-      price: "₹54,999"
+      // price: "₹54,999"
     }
   ];
 
@@ -99,8 +99,8 @@ export default function FeaturedCourses() {
 
                 {/* Course Stats */}
                 <div className="flex justify-between items-center mb-4 text-sm text-gray-500">
-                  <span>{course.duration}</span>
-                  <span>{course.students} students</span>
+                  {/* <span>{course.duration}</span>
+                  <span>{course.students} students</span> */}
                   <div className="flex items-center">
                     <span className="text-yellow-400">★</span>
                     <span className="ml-1">{course.rating}</span>
@@ -109,7 +109,7 @@ export default function FeaturedCourses() {
 
                 {/* Price */}
                 <div className="flex justify-between items-center mb-4">
-                  <span className="text-2xl font-bold text-gray-800">{course.price}</span>
+                  {/* <span className="text-2xl font-bold text-gray-800">{course.price}</span> */}
                   <span className="text-sm text-green-600 font-semibold">Popular</span>
                 </div>
 

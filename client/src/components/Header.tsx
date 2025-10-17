@@ -27,7 +27,7 @@ export default function Header() {
 
   return (
     <header className="bg-white/95 backdrop-blur-md shadow-lg sticky top-0 z-50 border-b border-gray-100">
-      <nav className="container mx-auto px-4 lg:px-8">
+      <nav className="container mx-auto px-4 lg:px-0">
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
@@ -35,9 +35,9 @@ export default function Header() {
               src="/images/CareerFastrack.png" 
               alt="CareerFastrack Logo"    
               width={200}           
-              height={45}            
+              height={165}            
               priority
-              className="h-10 w-auto"
+              className="h-15 w-auto"
             />
           </Link>
 
@@ -85,14 +85,14 @@ export default function Header() {
                   onClick={() => openModal('login')}
                   className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-300"
                 >
-                  Login
+                  Get Started
                 </button>
-                <button 
+                {/* <button 
                   onClick={() => openModal('register')}
                   className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
                 >
                   Get Started
-                </button>
+                </button> */}
               </>
             )}
           </div>
@@ -177,7 +177,7 @@ export default function Header() {
                     >
                       Login
                     </button>
-                    <button 
+                    {/* <button 
                       onClick={() => {
                         openModal('register');
                         setIsMobileMenuOpen(false);
@@ -185,7 +185,7 @@ export default function Header() {
                       className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 text-center"
                     >
                       Get Started
-                    </button>
+                    </button> */}
                   </div>
                 )}
               </div>

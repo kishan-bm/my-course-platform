@@ -25,10 +25,10 @@ export default function HeroSection() {
       <div className="relative z-10 text-white container mx-auto px-4 py-20">
         <div className="max-w-4xl">
           {/* Badge */}
-          <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-600/20 border border-blue-400/30 text-blue-200 text-sm font-medium mb-6">
+          {/* <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-600/20 border border-blue-400/30 text-blue-200 text-sm font-medium mb-6">
             <span className="w-2 h-2 bg-blue-400 rounded-full mr-2 animate-pulse"></span>
             Trusted by 10,000+ Students
-          </div>
+          </div> */}
 
           {/* Main Heading */}
           <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
@@ -75,7 +75,7 @@ export default function HeroSection() {
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 pt-8 border-t border-gray-700">
+          {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 pt-8 border-t border-gray-700">
             <div className="text-center">
               <div className="text-3xl md:text-4xl font-bold text-blue-400">10K+</div>
               <div className="text-gray-400">Students Trained</div>
@@ -92,7 +92,7 @@ export default function HeroSection() {
               <div className="text-3xl md:text-4xl font-bold text-orange-400">100+</div>
               <div className="text-gray-400">Partner Companies</div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>
