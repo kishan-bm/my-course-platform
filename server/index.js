@@ -78,7 +78,10 @@ app.post('/api/auth/send-otp', async (req, res) => {
       // TODO: Add SMS sending logic here later
       console.log('SMS sending not yet implemented.');
     }
-    res.status(200).json({ success: true, message: 'OTP sent successfully.' });
+  // In development return the otp for automated tests / debugging
+  const responsePayload = { success: true, message: 'OTP sent successfully.' };
+  if (process.env.NODE_ENV !== 'production') responsePayload.otp = otp;
+  res.status(200).json(responsePayload);
   } catch (error) {
     console.error('Error sending OTP:', error);
     res.status(500).json({ error: 'Failed to send OTP.' });

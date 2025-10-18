@@ -1,6 +1,12 @@
+"use client";
+
 import { FaVideo, FaUsers, FaClock, FaCalendarAlt, FaMicrophone, FaComments, FaDownload, FaCertificate, FaPlay, FaStar } from 'react-icons/fa';
+import { useAuthModal } from '@/hooks/userAuthModal';
+import { useUserStore } from '@/hooks/useUserStore';
 
 export default function LiveTrainingPage() {
+  const { openModal } = useAuthModal();
+  const { isLoggedIn } = useUserStore();
   const upcomingSessions = [
     {
       id: 1,
@@ -264,7 +270,11 @@ export default function LiveTrainingPage() {
                       <span className="text-2xl font-bold text-gray-800">₹{session.price}</span>
                       <span className="text-sm text-gray-500 ml-2">per session</span>
                     </div>
-                    <button className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:from-purple-700 hover:to-blue-700 transition-all duration-300">
+                    <button
+                      type="button"
+                      onClick={() => { if (!isLoggedIn) return openModal('login'); alert('Enrollment flow for logged-in users'); }}
+                      className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:from-purple-700 hover:to-blue-700 transition-all duration-300"
+                    >
                       Enroll Now
                     </button>
                   </div>
@@ -358,10 +368,10 @@ export default function LiveTrainingPage() {
             Limited seats available - book your spot today!
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-white text-purple-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors duration-300">
+            <button onClick={() => { if (!isLoggedIn) return openModal('login'); alert('View All Sessions for logged-in users'); }} className="bg-white text-purple-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors duration-300">
               View All Sessions
             </button>
-            <button className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-purple-600 transition-colors duration-300">
+            <button onClick={() => { if (!isLoggedIn) return openModal('login'); alert('Subscribed to notifications'); }} className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-purple-600 transition-colors duration-300">
               Get Notified
             </button>
           </div>

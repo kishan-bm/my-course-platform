@@ -1,17 +1,23 @@
+"use client";
+
 import CourseCard from '@/components/CourseCard';
+import { useAuthModal } from '@/hooks/userAuthModal';
+import { useUserStore } from '@/hooks/useUserStore';
 import { FaCode, FaDatabase, FaCloud, FaMobile, FaBrain, FaShieldAlt, FaRocket, FaChartLine } from 'react-icons/fa';
 
 export default function CoursesPage() {
+  const { openModal } = useAuthModal();
+  const { isLoggedIn } = useUserStore();
   const courses = [
     {
       title: "Full-Stack Web Development",
       description: "Master modern web development with React, Node.js, and databases. Build real-world projects and deploy them to production.",
       duration: "6 months",
       level: "Beginner to Advanced",
-      price: "₹49,999",
-      originalPrice: "₹79,999",
+      // price: "₹49,999",
+      // originalPrice: "₹79,999",
       rating: 4.9,
-      students: 2500,
+      // students: 2500,
       instructor: "Dr. Sarah Smith",
       icon: <FaCode />,
       features: ["Live Projects", "Job Guarantee", "Mentorship", "Certification"],
@@ -22,10 +28,10 @@ export default function CoursesPage() {
       description: "Learn Python, statistics, and ML algorithms. Work with real datasets and build predictive models.",
       duration: "8 months",
       level: "Intermediate",
-      price: "₹59,999",
-      originalPrice: "₹99,999",
+      // price: "₹59,999",
+      // originalPrice: "₹99,999",
       rating: 4.8,
-      students: 1800,
+      // students: 1800,
       instructor: "Prof. Michael Chen",
       icon: <FaDatabase />,
       features: ["Real Datasets", "Portfolio Projects", "Industry Mentors", "Job Placement"],
@@ -36,10 +42,10 @@ export default function CoursesPage() {
       description: "Master AWS, Docker, Kubernetes, and CI/CD pipelines. Learn infrastructure as code and cloud security.",
       duration: "5 months",
       level: "Intermediate to Advanced",
-      price: "₹44,999",
-      originalPrice: "₹69,999",
+      // price: "₹44,999",
+      // originalPrice: "₹69,999",
       rating: 4.9,
-      students: 1200,
+      // students: 1200,
       instructor: "Alex Johnson",
       icon: <FaCloud />,
       features: ["AWS Certified", "Hands-on Labs", "Industry Projects", "Career Support"],
@@ -50,10 +56,10 @@ export default function CoursesPage() {
       description: "Build iOS and Android apps using React Native and Flutter. Learn app store deployment and monetization.",
       duration: "6 months",
       level: "Beginner to Intermediate",
-      price: "₹39,999",
-      originalPrice: "₹64,999",
+      // price: "₹39,999",
+      // originalPrice: "₹64,999",
       rating: 4.7,
-      students: 1600,
+      // students: 1600,
       instructor: "Emma Wilson",
       icon: <FaMobile />,
       features: ["Cross-platform", "App Store Ready", "UI/UX Design", "Monetization"],
@@ -64,10 +70,10 @@ export default function CoursesPage() {
       description: "Deep dive into AI, neural networks, and deep learning. Build intelligent systems and chatbots.",
       duration: "10 months",
       level: "Advanced",
-      price: "₹79,999",
-      originalPrice: "₹129,999",
+      // price: "₹79,999",
+      // originalPrice: "₹129,999",
       rating: 4.9,
-      students: 900,
+      // students: 900,
       instructor: "Dr. Raj Patel",
       icon: <FaBrain />,
       features: ["Deep Learning", "NLP & Computer Vision", "Research Projects", "PhD Mentorship"],
@@ -78,10 +84,10 @@ export default function CoursesPage() {
       description: "Learn ethical hacking, penetration testing, and security architecture. Get certified in cybersecurity.",
       duration: "7 months",
       level: "Intermediate to Advanced",
-      price: "₹54,999",
-      originalPrice: "₹89,999",
+      // price: "₹54,999",
+      // originalPrice: "₹89,999",
       rating: 4.8,
-      students: 1100,
+      // students: 1100,
       instructor: "Captain James Lee",
       icon: <FaShieldAlt />,
       features: ["Ethical Hacking", "Security Certifications", "Penetration Testing", "Industry Labs"],
@@ -92,10 +98,10 @@ export default function CoursesPage() {
       description: "Master blockchain technology, smart contracts, and DeFi. Build decentralized applications.",
       duration: "6 months",
       level: "Intermediate",
-      price: "₹49,999",
-      originalPrice: "₹79,999",
+      // price: "₹49,999",
+      // originalPrice: "₹79,999",
       rating: 4.6,
-      students: 800,
+      // students: 800,
       instructor: "Vikram Singh",
       icon: <FaRocket />,
       features: ["Smart Contracts", "DeFi Projects", "NFT Development", "Crypto Trading"],
@@ -106,10 +112,10 @@ export default function CoursesPage() {
       description: "Learn SEO, SEM, social media marketing, and data analytics. Master growth hacking techniques.",
       duration: "4 months",
       level: "Beginner to Intermediate",
-      price: "₹29,999",
-      originalPrice: "₹49,999",
+      // price: "₹29,999",
+      // originalPrice: "₹49,999",
       rating: 4.7,
-      students: 2200,
+      // students: 2200,
       instructor: "Lisa Rodriguez",
       icon: <FaChartLine />,
       features: ["SEO & SEM", "Social Media", "Analytics Tools", "Growth Hacking"],
@@ -229,11 +235,19 @@ export default function CoursesPage() {
                       <span className="text-2xl font-bold text-gray-800">{course.price}</span>
                       <span className="text-sm text-gray-500 line-through ml-2">{course.originalPrice}</span>
                     </div>
-                    <span className="text-sm text-green-600 font-semibold">Save 37%</span>
+                    {/* <span className="text-sm text-green-600 font-semibold">Save 37%</span> */}
                   </div>
 
                   {/* CTA Button */}
-                  <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition-colors duration-300">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (!isLoggedIn) return openModal('login');
+                      // TODO: navigate to enrollment / purchase flow for logged-in users
+                      alert('Enrollment flow for logged-in users');
+                    }}
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition-colors duration-300"
+                  >
                     Enroll Now
                   </button>
                 </div>

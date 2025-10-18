@@ -3,196 +3,196 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useAuthModal } from '@/hooks/userAuthModal';
-import { useState } from 'react';
-import { FaBars, FaTimes, FaUser, FaSignOutAlt } from 'react-icons/fa';
+import { useUserStore } from '@/hooks/useUserStore';
+import { useState, useEffect } from 'react';
+import { FaBars } from 'react-icons/fa'; // Import the hamburger icon
+import SideMenu from './SideMenu';
+import { useRouter } from 'next/navigation';
 
 export default function Header() {
   const { openModal } = useAuthModal();
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // This would come from auth context in real app
+  const { isLoggedIn } = useUserStore();
+  const logoutUser = useUserStore((state) => state.logoutUser);
+  const router = useRouter();
 
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
+  const [isClient, setIsClient] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // State to control the side menu
 
-  const handleLogin = () => {
-    openModal('login');
-    setIsMobileMenuOpen(false);
-  };
-
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-    setIsMobileMenuOpen(false);
-  };
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   return (
-    <header className="bg-white/95 backdrop-blur-md shadow-lg sticky top-0 z-50 border-b border-gray-100">
-      <nav className="container mx-auto px-4 lg:px-0">
-        <div className="flex justify-between items-center py-4">
-          {/* Logo */}
-          <Link href="/" className="flex-shrink-0">
-            <Image
-              src="/images/CareerFastrack.png" 
-              alt="CareerFastrack Logo"    
-              width={200}           
-              height={165}            
-              priority
-              className="h-15 w-auto"
-            />
-          </Link>
+    <>
+      {/* Reuse existing SideMenu component for mobile/side navigation */}
+      <SideMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
 
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-8">
-            <Link href="/" className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-300">
-              Home
-            </Link>
-            <Link href="/courses" className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-300">
-              Courses
-            </Link>
-            <Link href="/placements" className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-300">
-              Placements
-            </Link>
-            <Link href="/live-training" className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-300">
-              Live Training
-            </Link>
-            <Link href="/about" className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-300">
-              About
-            </Link>
-            <Link href="/contact" className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-300">
-              Contact
+      <header className="bg-white shadow-sm sticky top-0 z-40">
+        <nav className="container mx-auto flex items-center p-4">
+          {/* Left: Logo */}
+          <div className="flex-1">
+            <Link href="/" className="flex items-center">
+              <Image
+                src="/images/CareerFastrack.png"
+                alt="Platform Logo"
+                width={150}
+                height={40}
+                priority
+              />
             </Link>
           </div>
 
-          {/* Desktop Auth Buttons */}
-          <div className="hidden lg:flex items-center space-x-4">
-            {isLoggedIn ? (
-              <div className="flex items-center space-x-4">
-                <div className="flex items-center space-x-2 text-gray-700">
-                  <FaUser className="text-sm" />
-                  <span className="text-sm font-medium">Welcome back!</span>
-                </div>
-                <button 
-                  onClick={handleLogout}
-                  className="flex items-center space-x-2 text-gray-600 hover:text-red-600 transition-colors duration-300"
-                >
-                  <FaSignOutAlt className="text-sm" />
-                  <span className="text-sm">Logout</span>
-                </button>
+          {/* Center: nav links (and search for logged-in users) */}
+          <div className="hidden md:flex items-center space-x-6 flex-1 justify-center">
+            {isClient && isLoggedIn && (
+              <div className="mr-6">
+                <input type="search" placeholder="Search courses or sessions..." className="px-4 py-2 rounded-lg border border-gray-200" />
               </div>
+            )}
+            <Link href="/" className="hover:text-blue-600">Home</Link>
+            <Link href="/courses" className="hover:text-blue-600">Courses</Link>
+            <Link href="/placements" className="hover:text-blue-600">Placements</Link>
+            <Link href="/live-training" className="hover:text-blue-600">Live Training</Link>
+            <Link href="/about" className="hover:text-blue-600">About Us</Link>
+            <Link href="/contact" className="hover:text-blue-600">Contact Us</Link>
+          </div>
+
+          {/* Right: controls */}
+          <div className="flex-1 text-right flex justify-end">
+            {isClient && isLoggedIn ? (
+              <button
+                onClick={() => setIsMenuOpen(true)}
+                className="text-gray-600 hover:text-blue-600"
+                aria-label="Open menu"
+              >
+                <FaBars className="h-7 w-7" />
+              </button>
             ) : (
               <>
-                <button 
-                  onClick={() => openModal('login')}
-                  className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-300"
-                >
-                  Get Started
+                <button onClick={() => openModal('login')} className="hidden md:inline-block bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors">
+                  Login
                 </button>
-                {/* <button 
-                  onClick={() => openModal('register')}
-                  className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
-                >
-                  Get Started
-                </button> */}
+                <button onClick={() => openModal('login')} className="md:hidden p-2 text-gray-700">
+                  <FaBars className="h-7 w-7" />
+                </button>
               </>
             )}
           </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={toggleMobileMenu}
-            className="lg:hidden p-2 text-gray-700 hover:text-blue-600 transition-colors duration-300"
-          >
-            {isMobileMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
-          </button>
-        </div>
-
-        {/* Mobile Navigation */}
-        {isMobileMenuOpen && (
-          <div className="lg:hidden border-t border-gray-100 py-4">
-            <div className="flex flex-col space-y-4">
-              <Link 
-                href="/" 
-                className="text-gray-700 hover:text-blue-600 font-medium py-2 transition-colors duration-300"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Home
-              </Link>
-              <Link 
-                href="/courses" 
-                className="text-gray-700 hover:text-blue-600 font-medium py-2 transition-colors duration-300"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Courses
-              </Link>
-              <Link 
-                href="/placements" 
-                className="text-gray-700 hover:text-blue-600 font-medium py-2 transition-colors duration-300"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Placements
-              </Link>
-              <Link 
-                href="/live-training" 
-                className="text-gray-700 hover:text-blue-600 font-medium py-2 transition-colors duration-300"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Live Training
-              </Link>
-              <Link 
-                href="/about" 
-                className="text-gray-700 hover:text-blue-600 font-medium py-2 transition-colors duration-300"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                About
-              </Link>
-              <Link 
-                href="/contact" 
-                className="text-gray-700 hover:text-blue-600 font-medium py-2 transition-colors duration-300"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Contact
-              </Link>
-              
-              {/* Mobile Auth Buttons */}
-              <div className="pt-4 border-t border-gray-100">
-                {isLoggedIn ? (
-                  <div className="flex flex-col space-y-3">
-                    <div className="flex items-center space-x-2 text-gray-700">
-                      <FaUser className="text-sm" />
-                      <span className="text-sm font-medium">Welcome back!</span>
-                    </div>
-                    <button 
-                      onClick={handleLogout}
-                      className="flex items-center space-x-2 text-gray-600 hover:text-red-600 transition-colors duration-300 py-2"
-                    >
-                      <FaSignOutAlt className="text-sm" />
-                      <span className="text-sm">Logout</span>
-                    </button>
-                  </div>
-                ) : (
-                  <div className="flex flex-col space-y-3">
-                    <button 
-                      onClick={handleLogin}
-                      className="text-gray-700 hover:text-blue-600 font-medium py-2 text-left transition-colors duration-300"
-                    >
-                      Login
-                    </button>
-                    {/* <button 
-                      onClick={() => {
-                        openModal('register');
-                        setIsMobileMenuOpen(false);
-                      }}
-                      className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 text-center"
-                    >
-                      Get Started
-                    </button> */}
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        )}
-      </nav>
-    </header>
+        </nav>
+      </header>
+    </>
   );
 }
+
+
+// 'use client';
+
+// import Link from 'next/link';
+// import Image from 'next/image';
+// import { useAuthModal } from '@/hooks/userAuthModal';
+// import { useUserStore } from '@/hooks/useUserStore';
+// import { Menu, Transition } from '@headlessui/react';
+// import { Fragment, useState, useEffect } from 'react';
+// import { FaUserCircle } from 'react-icons/fa';
+
+// export default function Header() {
+//   const { openModal } = useAuthModal();
+//   const { isLoggedIn, user, logoutUser } = useUserStore();
+//   const [isClient, setIsClient] = useState(false);
+
+//   // This effect ensures the component only renders the user state on the client-side
+//   // to prevent hydration errors with Next.js SSR.
+//   useEffect(() => {
+//     setIsClient(true);
+//   }, []);
+
+//   return (
+//     <header className="bg-white shadow-sm sticky top-0 z-40">
+//       <nav className="container mx-auto flex justify-between items-center p-4">
+//         {/* Logo */}
+//         <Link href="/">
+//             <Image
+//               src="/images/CareerFastrack.png"
+//               alt="Platform Logo"
+//               width={150}
+//               height={40}
+//               priority
+//             />
+//         </Link>
+
+//         {/* Navigation Links */}
+//         <div className="hidden md:flex items-center space-x-6">
+//           <Link href="/" className="hover:text-blue-600">Home</Link>
+//           <Link href="/courses" className="hover:text-blue-600">Courses</Link>
+//           <Link href="/placements" className="hover:text-blue-600">Placements</Link>
+//           <Link href="/live-training" className="hover:text-blue-600">Live Training</Link>
+//           <Link href="/about" className="hover:text-blue-600">About Us</Link>
+//           <Link href="/contact" className="hover:text-blue-600">Contact Us</Link>
+//         </div>
+
+//         {/* Conditional UI: Login Button vs. User Menu */}
+//         <div className="w-20 text-right">
+//           {isClient && isLoggedIn ? (
+//             // --- Logged-in User Menu ---
+//             <Menu as="div" className="relative inline-block text-left">
+//               <div>
+//                 <Menu.Button className="flex items-center text-gray-600 hover:text-blue-600">
+//                   <span className="sr-only">Open user menu</span>
+//                   <FaUserCircle className="h-8 w-8" />
+//                 </Menu.Button>
+//               </div>
+//               <Transition
+//                 as={Fragment}
+//                 enter="transition ease-out duration-100"
+//                 enterFrom="transform opacity-0 scale-95"
+//                 enterTo="transform opacity-100 scale-100"
+//                 leave="transition ease-in duration-75"
+//                 leaveFrom="transform opacity-100 scale-100"
+//                 leaveTo="transform opacity-0 scale-95"
+//               >
+//                 <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none">
+//                   <div className="px-1 py-1 ">
+//                     <div className="px-3 py-2">
+//                         <p className="text-sm">Signed in as</p>
+//                         <p className="text-sm font-medium text-gray-900 truncate">{user?.fullName}</p>
+//                     </div>
+//                   </div>
+//                   <div className="px-1 py-1">
+//                     <Menu.Item>
+//                       {({ active }) => (
+//                         <Link href="/profile" className={`${active ? 'bg-blue-500 text-white' : 'text-gray-900'} group flex w-full items-center rounded-md px-2 py-2 text-sm`}>
+//                           Profile
+//                         </Link>
+//                       )}
+//                     </Menu.Item>
+//                     <Menu.Item>
+//                       {({ active }) => (
+//                         <Link href="/my-courses" className={`${active ? 'bg-blue-500 text-white' : 'text-gray-900'} group flex w-full items-center rounded-md px-2 py-2 text-sm`}>
+//                           My Courses
+//                         </Link>
+//                       )}
+//                     </Menu.Item>
+//                   </div>
+//                   <div className="px-1 py-1">
+//                     <Menu.Item>
+//                       {({ active }) => (
+//                         <button onClick={logoutUser} className={`${active ? 'bg-blue-500 text-white' : 'text-gray-900'} group flex w-full items-center rounded-md px-2 py-2 text-sm`}>
+//                           Logout
+//                         </button>
+//                       )}
+//                     </Menu.Item>
+//                   </div>
+//                 </Menu.Items>
+//               </Transition>
+//             </Menu>
+//           ) : (
+//             // --- Logged-out User Button ---
+//             <button onClick={() => openModal('login')} className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors">
+//               Login
+//             </button>
+//           )}
+//         </div>
+//       </nav>
+//     </header>
+//   );
+// }
