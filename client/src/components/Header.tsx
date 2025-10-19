@@ -85,7 +85,7 @@ export default function Header() {
 }
 
 
-// 'use client';
+{/* // 'use client';
 
 // import Link from 'next/link';
 // import Image from 'next/image';
@@ -95,7 +95,7 @@ export default function Header() {
 // import { Fragment, useState, useEffect } from 'react';
 // import { FaUserCircle } from 'react-icons/fa';
 
-// export default function Header() {
+// export default function Header() { */}
 //   const { openModal } = useAuthModal();
 //   const { isLoggedIn, user, logoutUser } = useUserStore();
 //   const [isClient, setIsClient] = useState(false);
