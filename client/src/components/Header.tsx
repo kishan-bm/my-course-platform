@@ -95,13 +95,6 @@ export default function Header() {
 // import { Fragment, useState, useEffect } from 'react';
 // import { FaUserCircle } from 'react-icons/fa';
 
-// import Link from 'next/link';
-// import Image from 'next/image';
-// import { useAuthModal } from '@/hooks/userAuthModal';
-// import { useUserStore } from '@/hooks/useUserStore';
-// import { Menu, Transition } from '@headlessui/react';
-// import { Fragment, useState, useEffect } from 'react';
-// import { FaUserCircle } from 'react-icons/fa';
 
 // export default function Header() { */}
 //   const { openModal } = useAuthModal();
