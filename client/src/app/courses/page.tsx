@@ -226,14 +226,14 @@ export default function CoursesPage() {
                   {/* Duration & Students */}
                   <div className="flex justify-between text-sm text-gray-500 mb-4">
                     <span>{course.duration}</span>
-                    <span>{course.students} students</span>
+                    {/* <span>{course.students} students</span> */}
                   </div>
 
                   {/* Price */}
                   <div className="flex items-center justify-between mb-4">
                     <div>
-                      <span className="text-2xl font-bold text-gray-800">{course.price}</span>
-                      <span className="text-sm text-gray-500 line-through ml-2">{course.originalPrice}</span>
+                      {/* <span className="text-2xl font-bold text-gray-800">{course.price}</span>
+                      <span className="text-sm text-gray-500 line-through ml-2">{course.originalPrice}</span> */}
                     </div>
                     {/* <span className="text-sm text-green-600 font-semibold">Save 37%</span> */}
                   </div>
