@@ -1,4 +1,4 @@
-import CourseCard from './CourseCard';
+// CourseCard not used here; keeping layout lightweight
 import { FaCode, FaDatabase, FaCloud, FaMobile, FaBrain, FaShieldAlt } from 'react-icons/fa';
 
 export default function FeaturedCourses() {

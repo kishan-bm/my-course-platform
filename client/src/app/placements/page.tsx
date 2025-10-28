@@ -1,4 +1,4 @@
-import { FaBuilding, FaUsers, FaTrophy, FaGraduationCap, FaStar, FaMapMarkerAlt, FaRupeeSign } from 'react-icons/fa';
+import { FaBuilding, FaUsers, FaTrophy, FaGraduationCap, FaStar, FaRupeeSign } from 'react-icons/fa';
 
 export default function PlacementsPage() {
   const successStories = [
@@ -176,7 +176,7 @@ export default function PlacementsPage() {
                 </div>
 
                 {/* Testimonial */}
-                <p className="text-gray-600 italic mb-4">"{story.testimonial}"</p>
+                <p className="text-gray-600 italic mb-4">&ldquo;{story.testimonial}&rdquo;</p>
 
                 {/* Course Badge */}
                 <span className="inline-block bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full">

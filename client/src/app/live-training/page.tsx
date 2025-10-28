@@ -1,6 +1,6 @@
 "use client";
 
-import { FaVideo, FaUsers, FaClock, FaCalendarAlt, FaMicrophone, FaComments, FaDownload, FaCertificate, FaPlay, FaStar } from 'react-icons/fa';
+import { FaVideo, FaUsers, FaClock, FaCalendarAlt, FaMicrophone, FaComments, FaDownload, FaCertificate, FaStar } from 'react-icons/fa';
 import { useAuthModal } from '@/hooks/userAuthModal';
 import { useUserStore } from '@/hooks/useUserStore';
 
@@ -308,7 +308,7 @@ export default function LiveTrainingPage() {
                     </div>
                   </div>
                 </div>
-                <p className="text-gray-600 italic">"{testimonial.comment}"</p>
+                <p className="text-gray-600 italic">&ldquo;{testimonial.comment}&rdquo;</p>
               </div>
             ))}
           </div>

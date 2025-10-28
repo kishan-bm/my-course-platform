@@ -12,8 +12,6 @@ import { useRouter } from 'next/navigation';
 export default function Header() {
   const { openModal } = useAuthModal();
   const { isLoggedIn } = useUserStore();
-  const logoutUser = useUserStore((state) => state.logoutUser);
-  const router = useRouter();
 
   const [isClient, setIsClient] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false); // State to control the side menu
