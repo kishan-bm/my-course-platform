@@ -18,6 +18,7 @@ model User {
   passwordHash String
   otp          String?
   otpExpiresAt DateTime?
+  lastLoginAt  DateTime?
   isVerified   Boolean   @default(false)
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
